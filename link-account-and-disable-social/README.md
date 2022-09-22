@@ -63,3 +63,25 @@ resulting code:
 ```
 
 
+Next locate the following code:
+```javascript
+function shouldPrompt() {
+  return !insideRedirect() && !redirectingToContinue() && firstLogin();
+
+```
+
+and replace it with: 
+```javascript
+function shouldPrompt() {
+  return !insideRedirect() && !redirectingToContinue() && !user.user_id.startsWith("auth0");
+ ```
+ and remove the `firstLogin` function completely.
+ 
+ ```javascript
+  // Check if this is the first login of the user
+  // since merging already active accounts can be a
+  // destructive action
+  function firstLogin() {
+    return context.stats.loginsCount <= 1;
+  }
+```
