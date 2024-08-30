@@ -73,7 +73,7 @@ function shouldPrompt() {
 and replace it with: 
 ```javascript
 function shouldPrompt() {
-  return !insideRedirect() && !redirectingToContinue() && !user.user_id.startsWith("auth0");
+  return !insideRedirect() && !redirectingToContinue() && user.identities[0].isSocial && !user.user_id.startsWith("auth0");
  ```
  and remove the `firstLogin` function completely.
  
